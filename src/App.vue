@@ -23,11 +23,13 @@
                             <a>退出</a>
                             <strong>|</strong>
                         </span>
-                        <a href="" class="">
+
+                        <router-link to="/buyCart">
                             <i class="iconfont icon-cart"></i>购物车(
                             <span id="shoppingCartCount">
-                                <span>4</span>
-                            </span>)</a>
+                                <span>{{this.$store.getters.totalCount}}</span>
+                            </span>)
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -118,10 +120,41 @@
 </template>
 
 <script>
+//引入jquery模块
+import $ from "jquery";
+
 export default {
-  name: "app"
+  name: "app",
+  mounted() {
+    $("#menu2 li a").wrapInner('<span class="out"></span>');
+    $("#menu2 li a").each(function() {
+      $('<span class="over">' + $(this).text() + "</span>").appendTo(this);
+    });
+
+    $("#menu2 li a").hover(
+      function() {
+        $(".out", this)
+          .stop()
+          .animate({ top: "48px" }, 300); // move down - hide
+        $(".over", this)
+          .stop()
+          .animate({ top: "0px" }, 300); // move down - show
+      },
+      function() {
+        $(".out", this)
+          .stop()
+          .animate({ top: "0px" }, 300); // move up - show
+        $(".over", this)
+          .stop()
+          .animate({ top: "-48px" }, 300); // move up - hide
+      }
+    );
+  }
 };
 </script>
 
-<style>
+<style scoped>
+@import url("./assets/statics/lib/hoverNav/css/style.css");
+
+
 </style>

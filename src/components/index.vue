@@ -1,5 +1,5 @@
 <template>
-    <!-- eslint-disable -->
+   
     <div>
         <div class="section">
             <div class="location">
@@ -84,7 +84,7 @@
                 <div class="wrap-box">
                     <ul class="img-list">
                         <li v-for="(data, index) in item.datas" :key="data.artID">
-                            <a href="#/site/goodsinfo/87" class="">
+                            <router-link :to="'/goodsInfo/'+data.artID">
                                 <div class="img-box">
                                     <img v-lazy="data.img_url">
                                 </div>
@@ -99,7 +99,7 @@
                                         </span>
                                     </p>
                                 </div>
-                            </a>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -110,8 +110,7 @@
 <script>
 /* eslint-disable */
 
-//引入jquery模块
-import $ from "jquery";
+
 // 引入js
 export default {
   name: "index",
@@ -144,34 +143,9 @@ export default {
       });
   },
 
-  mounted() {
-    $("#menu2 li a").wrapInner('<span class="out"></span>');
-    $("#menu2 li a").each(function() {
-      $('<span class="over">' + $(this).text() + "</span>").appendTo(this);
-    });
-
-    $("#menu2 li a").hover(
-      function() {
-        $(".out", this)
-          .stop()
-          .animate({ top: "48px" }, 300); // move down - hide
-        $(".over", this)
-          .stop()
-          .animate({ top: "0px" }, 300); // move down - show
-      },
-      function() {
-        $(".out", this)
-          .stop()
-          .animate({ top: "0px" }, 300); // move up - show
-        $(".over", this)
-          .stop()
-          .animate({ top: "-48px" }, 300); // move up - hide
-      }
-    );
-  }
 };
 </script>
 <style scoped>
-@import "../assets/statics/lib/hoverNav20151228/css/style.css";
+
 </style>
 
